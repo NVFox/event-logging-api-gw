@@ -1,0 +1,38 @@
+base-prefix: /api/v1
+
+spring:
+  application:
+    name: api-gateway
+    version: ${project.version}
+  cloud:
+    gateway:
+      routes:
+        - id: event-service
+          uri: ${EVENT_SERVICE_URL:http://localhost:8081}
+          predicates:
+            - Path=/events/**
+          filters:
+            - PrefixPath=${base-prefix}
+        - id: log-service
+          uri: ${LOG_SERVICE_URL:http://localhost:8082}
+          predicates:
+            - Path=/logs/**
+          filters:
+            - PrefixPath=${base-prefix}
+        - id: notification-service
+          uri: ${NOTIFICATION_SERVICE_URL:http://localhost:8083}
+          predicates:
+            - Path=/notifications/**
+          filters:
+            - PrefixPath=${base-prefix}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+    gateway:
+      access: read_only
