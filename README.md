@@ -38,6 +38,10 @@ La aplicación aprovecha Spring WebFlux y Project Reactor para:
 - **Programación Funcional**: Permitir operaciones declarativas y componibles en flujos de datos
 - **Resiliencia**: Mecanismos de reintento y manejo de errores incorporados
 
+### Pipelines de CI
+
+La plataforma incluye pipelines de CI para automatizar la construcción de microservicios. Esto asegura que automáticamente al pushear nuevos cambios, se actualicen los archivos correspondientes al repositorio y estén listos para despliegue a un ambiente productivo.
+
 ## Componentes
 
 ### 1. Servicio de Procesamiento de Eventos
@@ -97,3 +101,9 @@ Este servicio gestiona la entrega de notificaciones push a usuarios finales a tr
 ## Configuración (WIP - Trabajando en ello...)
 
 Cada servicio puede ser configurado utilizando perfiles de Spring y variables de entorno. Consulta los READMEs individuales de los servicios para opciones de configuración detalladas.
+
+* **Servicio de procesamiento de eventos**: https://github.com/NVFox/pevent-registering-ms
+* **Servicio de registro de auditoría**: https://github.com/NVFox/pevent-logger-ms
+* **Servicio de notificaciones**: https://github.com/NVFox/pevent-notification-ms
+
+Cada servicio tiene su propio Dockerfile, y adicionalmente se incluye en cada repositorio paquetes (imágenes de docker) pre construidas y listas para ejecutar desde un archivo `docker-compose.yml`.
